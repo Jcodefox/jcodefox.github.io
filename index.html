@@ -1,9 +1,72 @@
 <!DOCTYPE html>
 
 <html>
-  <body style="background-color:black;color:green">
-    <h1>This website is being built by Jcodefox...</h1>
-    <p>While you're waiting why don't you try <a href="https://jcodefox.itch.io/zenith-bots">Zenith Bots</a>?</p>
-    <div style="position: absolute; bottom: 5px"><a href="https://github.com/JCodeFox">Jcodefox's github</a></div>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="keywords" content="Fox, Programming, Code, C, Godot, Linux">
+    <meta name="description" content="Info about Jcodefox">
+    <link rel="icon" href="icon.png">
+    <title>Jcodefox</title>
+    <style>
+      html, body{
+        margin: 0px;
+        background-color: #000000;
+        color: #00ff00;
+      }
+      .fill {
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100vh;
+        position: absolute;
+      }
+      #jcode_logo {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+      }
+
+      .spin {
+        animation-name: spin;
+        animation-duration: 15000ms;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+      }
+
+      #content {
+        z-index: -1;
+      }
+
+      .no_drag {
+        pointer-events: none;
+        user-drag: none;
+        -webkit-user-drag: none;
+        user-select: none;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select: none;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="content" class="fill">
+      <div id="jcode_logo">
+        <img class="fill no_drag" src="lines.svg" alt="Circle"/>
+        <img class="spin no_drag" style="position: absolute; width: 30vh" src="circle.svg" alt="Circle"/>
+        <img class="no_drag" style="position: absolute; width: 20vh" src="jcode_outline.svg" alt="Jcodefox"/>
+      </div>
+    </div>
+    <p>[WARN] Unfinished site<br/>[INFO] <a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">Youtube channel</a><br/>[INFO] <a href="https://jcodefox.itch.io/">itch.io page</a>
+    </p>
   </body>
 </html>
