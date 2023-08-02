@@ -8,15 +8,35 @@
     <link rel="icon" href="icon.png">
     <title>Jcodefox</title>
     <style>
-      html, body{
+      body{
         margin: 0px;
         background-color: #000000;
         color: #00ff00;
       }
+      a {
+        color: #00ff00;
+        outline: 2px solid #00ff00;
+        outline-offset: 2px;
+        text-decoration: none;
+        margin: 5px;
+      }
+      #title {
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        text-align: center;
+        margin: 20px;
+        z-index: -1;
+      }
+      #links {
+        position: absolute;
+        top: 10px;
+        right: 5px;
+      }
       .fill {
         top: 0px;
         left: 0px;
-        width: 100%;
+        width: 100vw;
         height: 100vh;
         position: absolute;
       }
@@ -35,7 +55,7 @@
       }
 
       #content {
-        z-index: -1;
+        z-index: -10;
       }
 
       .no_drag {
@@ -61,12 +81,15 @@
   <body>
     <div id="content" class="fill">
       <div id="jcode_logo">
-        <img class="fill no_drag" src="lines.svg" alt="Circle"/>
-        <img class="spin no_drag" style="position: absolute; width: 30vh" src="circle.svg" alt="Circle"/>
-        <img class="no_drag" style="position: absolute; width: 20vh" src="jcode_outline.svg" alt="Jcodefox"/>
+        <img class="no_drag" style="position: absolute; width: 100vw; height: 100vh" src="lines.svg" alt="Lines"/>
+        <img class="spin no_drag" style="position: absolute; width: 15vw; height: 30vh" src="circle.svg" alt="Circle"/>
+        <img class="no_drag" style="position: absolute; width: 10vw; height: 25vh" src="jcode_outline.svg" alt="Jcodefox"/>
+      </div>
+      <div id="links">
+        <a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">Youtube channel</a>
+        <a href="https://jcodefox.itch.io/">Games I made</a>
       </div>
     </div>
-    <p>[WARN] Unfinished site<br/>[INFO] <a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">Youtube channel</a><br/>[INFO] <a href="https://jcodefox.itch.io/">itch.io page</a>
-    </p>
+    <h1 id="title">Jcodefox<h1>
   </body>
 </html>
