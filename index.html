@@ -1,95 +1,134 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="keywords" content="Fox, Programming, Code, C, Godot, Linux">
-    <meta name="description" content="Info about Jcodefox">
-    <link rel="icon" href="icon.png">
-    <title>Jcodefox</title>
-    <style>
-      body{
-        margin: 0px;
-        background-color: #000000;
-        color: #00ff00;
-      }
-      a {
-        color: #00ff00;
-        outline: 2px solid #00ff00;
-        outline-offset: 2px;
-        text-decoration: none;
-        margin: 5px;
-      }
-      #title {
-        position: absolute;
-        top: 5px;
-        left: 5px;
-        text-align: center;
-        margin: 20px;
-        z-index: -1;
-      }
-      #links {
-        position: absolute;
-        top: 10px;
-        right: 5px;
-      }
-      .fill {
-        top: 0px;
-        left: 0px;
-        width: 100vw;
-        height: 100vh;
-        position: absolute;
-      }
-      #jcode_logo {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100%;
-      }
+	<head>
+		<meta charset="UTF-8">
+		<meta name="keywords" content="Fox, Programming, Code, C, Godot, Linux">
+		<meta name="description" content="Info about Jcodefox">
+		<link rel="icon" href="images/icon.png">
+		<title>Jcodefox</title>
+		<style>
+body{
+	margin: 0px;
+	background-color: #000000;
+	color: #00ff00;
+	overflow: hidden;
+}
+	  a {
+		  color: #00ff00;
+		  outline: 2px solid #00ff00;
+		  outline-offset: 2px;
+		  text-decoration: none;
+		  margin: 5px;
+	  }
+	  #title {
+		  position: absolute;
+		  top: 5px;
+		  left: 5px;
+		  text-align: center;
+		  margin: 20px;
+		  z-index: -1;
+	  }
+	  #links {
+		  position: absolute;
+		  top: 10px;
+		  right: 5px;
+	  }
+	  .fill_parent_height {
+		  position: absolute;
+		  height: 100%;
+	  }
+	  .fill_parent_width {
+		  width: 100%;
+		  position: absolute;
+	  }
+	  .center_children {
+		  justify-content: center;
+		  align-items: center;
+		  display: flex;
+	  }
 
-      .spin {
-        animation-name: spin;
-        animation-duration: 15000ms;
-        animation-iteration-count: infinite;
-        animation-timing-function: linear;
-      }
+	  .spin {
+		  animation-name: spin;
+		  animation-duration: 15000ms;
+		  animation-iteration-count: infinite;
+		  animation-timing-function: linear;
+	  }
 
-      #content {
-        z-index: -10;
-      }
+	  .no_drag {
+		  pointer-events: none;
+		  user-drag: none;
+		  -webkit-user-drag: none;
+		  user-select: none;
+		  -moz-user-select: none;
+		  -webkit-user-select: none;
+		  -ms-user-select: none;
+	  }
 
-      .no_drag {
-        pointer-events: none;
-        user-drag: none;
-        -webkit-user-drag: none;
-        user-select: none;
-        -moz-user-select: none;
-        -webkit-user-select: none;
-        -ms-user-select: none;
-      }
+	  @keyframes spin {
+		  from {
+			  transform: rotate(0deg);
+		  }
+		  to {
+			  transform: rotate(360deg);
+		  }
+	  }
+		</style>
+		<script type="text/javascript">
+			var element = null;
+			var element_start_x = 0, element_start_y = 0;
+			var offset_x = 0, offset_y = 0;
+			window.onload = function() {
+				element = document.getElementById("jcode_logo");
+				element.onmousedown = start_drag;
+				element_start_x = element.style.left;
+				element_start_y = element.style.top;
+			}
 
-      @keyframes spin {
-        from {
-          transform: rotate(0deg);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <div id="content" class="fill">
-      <div id="jcode_logo">
-        <img class="no_drag" style="position: absolute; width: 100vw; height: 100vh" src="lines.svg" alt="Lines"/>
-        <img class="spin no_drag" style="position: absolute; width: 15vw; height: 30vh" src="circle.svg" alt="Circle"/>
-        <img class="no_drag" style="position: absolute; width: 10vw; height: 25vh" src="jcode_outline.svg" alt="Jcodefox"/>
-      </div>
-      <div id="links">
-        <a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">Youtube channel</a>
-        <a href="https://jcodefox.itch.io/">Games I made</a>
-      </div>
-    </div>
-    <h1 id="title">Jcodefox<h1>
-  </body>
+			function start_drag(e) {
+				e = e || window.event;
+				e.preventDefault();
+				offset_x = element.getBoundingClientRect().x - e.clientX;
+				offset_y = element.getBoundingClientRect().y - e.clientY;
+				document.onmousemove = drag;
+				document.onmouseup = stop_drag;
+			}
+
+			function drag(e) {
+				e = e || window.event;
+				e.preventDefault();
+				element = document.getElementById("jcode_logo");
+				element.style.top = (e.clientY + offset_y) + "px";
+				element.style.left = (e.clientX + offset_x) + "px";
+				if (Math.abs(e.clientY + offset_y - element_start_y) > Math.abs(e.clientX + offset_x - element_start_x)){
+					element.style.left = element_start_x;
+				}else{
+					element.style.top = element_start_y;
+				}
+			}
+
+			function stop_drag() {
+				document.onmousemove = null;
+				document.onmouseup = null;
+				element.style.top = element_start_y;
+				element.style.left = element_start_x;
+			}
+		</script>
+	</head>
+	<body>
+		<div style="z-index: -10; top: 0px" class="fill_parent_width fill_parent_height">
+			<div class="fill_parent_width fill_parent_height center_children">
+				<img class="no_drag" style="position: absolute; height: 90vh" src="images/lines.svg" alt="Lines"/>
+				<div id="jcode_logo" class="center_children" style="position:absolute; height: 30vh">
+					<img class="fill_parent_height spin" src="images/circle.svg" alt="Circle"/>
+					<img style="position: absolute; height: 80%" src="images/jcode_outline.svg" alt="Jcodefox"/>
+				</div>
+			</div>
+			<div id="links">
+				<a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">Youtube channel</a>
+				<a href="https://jcodefox.itch.io/">Games I made</a>
+			</div>
+		</div>
+		<h1 id="title">Jcodefox<h1>
+	</body>
 </html>
