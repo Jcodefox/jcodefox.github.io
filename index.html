@@ -76,11 +76,29 @@ body{
 		</style>
 		<script type="text/javascript">
 			var element = null;
-			var element_start_x = 0, element_start_y = 0;
+			var element_dock_x = 0, element_dock_y = 0;
 			var offset_x = 0, offset_y = 0;
+			var dest_x = 0, dest_y = 0;
 			window.onload = function() {
 				element = document.getElementById("jcode_logo");
 				element.onmousedown = start_drag;
+				requestAnimationFrame(draw);
+				element_dock_x = window.innerWidth * 0.5 - element.width * 0.5;
+				element_dock_y = window.innerHeight * 0.5 - element.height * 0.5;
+				dest_x = element_dock_x;
+				dest_y = element_dock_y;
+			}
+
+			function draw(){
+				var move_dir_x = Math.min(Math.max(dest_x - element.offsetLeft, -25), 25);
+				element.style.left = element.offsetLeft + move_dir_x + "px";
+				var move_dir_y = Math.min(Math.max(dest_y - element.offsetTop, -25), 25);
+				element.style.top = element.offsetTop + move_dir_y + "px";
+
+				element_dock_x = window.innerWidth * 0.5 - element.offsetWidth * 0.5;
+				element_dock_y = window.innerHeight * 0.5 - element.offsetHeight * 0.5;
+
+				requestAnimationFrame(draw);
 			}
 
 			function start_drag(e) {
@@ -90,8 +108,6 @@ body{
 				offset_y = element.offsetTop - e.clientY;
 				document.onmousemove = drag;
 				document.onmouseup = stop_drag;
-				element_start_x = element.offsetLeft;
-				element_start_y = element.offsetTop;
 			}
 
 			function drag(e) {
@@ -100,30 +116,66 @@ body{
 				element = document.getElementById("jcode_logo");
 				var new_top = (e.clientY + offset_y);
 				var new_left = (e.clientX + offset_x);
-				element.style.top = new_top + "px"; 
-				element.style.left = new_left + "px"; 
-				var y_delta = Math.abs(new_top - element_start_y);
-				var x_delta = Math.abs(new_left - element_start_x);
-				console.log(x_delta + " | " + y_delta);
+				dest_x = new_left;
+				dest_y = new_top;
+				var x_delta = Math.abs(dest_x - element_dock_x);
+				var y_delta = Math.abs(dest_y - element_dock_y);
 				if (y_delta > x_delta){ 
-					element.style.left = element_start_x + "px";
+					dest_x = element_dock_x;
 				}else{
-					element.style.top = element_start_y + "px";
+					dest_y = element_dock_y;
 				}
 			}
 
 			function stop_drag() {
 				document.onmousemove = null;
 				document.onmouseup = null;
-				element.style.top = element_start_y + "px";
-				element.style.left = element_start_x + "px";
+				var x_delta = Math.abs(dest_x - element_dock_x);
+				var y_delta = Math.abs(dest_y - element_dock_y);
+				if (y_delta > x_delta){
+					if (dest_y < window.innerHeight * 0.33){
+						element_dock_y = -element.offsetHeight * 0.5;
+						element.style.transform = 'rotate(180deg)';
+						lines_visibility(false);
+					}else if (dest_y > window.innerHeight * 0.66){
+						element_dock_y = window.innerHeight - element.offsetHeight * 0.5;
+						element.style.transform = 'rotate(0deg)';
+						lines_visibility(false);
+					}else{
+						element.style.transform = 'rotate(0deg)';
+						lines_visibility(true);
+					}
+				}else{
+					if (dest_x < window.innerWidth * 0.33){
+						element_dock_x = 0;
+						element.style.transform = 'rotate(90deg)';
+						lines_visibility(false);
+					}else if (dest_x > window.innerWidth * 0.66){
+						element_dock_x = window.innerWidth;
+						element.style.transform = 'rotate(270deg)';
+						lines_visibility(false);
+					}else{
+						element.style.transform = 'rotate(0deg)';
+						lines_visibility(true);
+					}
+				}
+				dest_x = element_dock_x;
+				dest_y = element_dock_y;
+			}
+
+			function lines_visibility(value){
+				if(value){
+					document.getElementById("lines").style.visibility = "visible";
+				}else{
+					document.getElementById("lines").style.visibility = "hidden";
+				}
 			}
 		</script>
 	</head>
 	<body>
 		<div style="z-index: -10; top: 0px" class="fill_parent_width fill_parent_height">
 			<div class="fill_parent_width fill_parent_height center_children">
-				<img class="no_drag" style="position: absolute; height: 90vh; min-width: 100%" src="images/lines.svg" alt="Lines"/>
+				<img id="lines" class="no_drag" style="position: absolute; height: 90vh; min-width: 100%" src="images/lines.svg" alt="Lines"/>
 				<div id="jcode_logo" class="center_children" style="position:absolute; height: 30vh">
 					<img class="fill_parent_height spin" src="images/circle.svg" alt="Circle"/>
 					<img style="position: absolute; height: 80%" src="images/jcode_outline.svg" alt="Jcodefox"/>
