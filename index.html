@@ -81,44 +81,49 @@ body{
 			window.onload = function() {
 				element = document.getElementById("jcode_logo");
 				element.onmousedown = start_drag;
-				element_start_x = element.style.left;
-				element_start_y = element.style.top;
 			}
 
 			function start_drag(e) {
 				e = e || window.event;
 				e.preventDefault();
-				offset_x = element.getBoundingClientRect().x - e.clientX;
-				offset_y = element.getBoundingClientRect().y - e.clientY;
+				offset_x = element.offsetLeft - e.clientX;
+				offset_y = element.offsetTop - e.clientY;
 				document.onmousemove = drag;
 				document.onmouseup = stop_drag;
+				element_start_x = element.offsetLeft;
+				element_start_y = element.offsetTop;
 			}
 
 			function drag(e) {
 				e = e || window.event;
 				e.preventDefault();
 				element = document.getElementById("jcode_logo");
-				element.style.top = (e.clientY + offset_y) + "px";
-				element.style.left = (e.clientX + offset_x) + "px";
-				if (Math.abs(e.clientY + offset_y - element_start_y) > Math.abs(e.clientX + offset_x - element_start_x)){
-					element.style.left = element_start_x;
+				var new_top = (e.clientY + offset_y);
+				var new_left = (e.clientX + offset_x);
+				element.style.top = new_top + "px"; 
+				element.style.left = new_left + "px"; 
+				var y_delta = Math.abs(new_top - element_start_y);
+				var x_delta = Math.abs(new_left - element_start_x);
+				console.log(x_delta + " | " + y_delta);
+				if (y_delta > x_delta){ 
+					element.style.left = element_start_x + "px";
 				}else{
-					element.style.top = element_start_y;
+					element.style.top = element_start_y + "px";
 				}
 			}
 
 			function stop_drag() {
 				document.onmousemove = null;
 				document.onmouseup = null;
-				element.style.top = element_start_y;
-				element.style.left = element_start_x;
+				element.style.top = element_start_y + "px";
+				element.style.left = element_start_x + "px";
 			}
 		</script>
 	</head>
 	<body>
 		<div style="z-index: -10; top: 0px" class="fill_parent_width fill_parent_height">
 			<div class="fill_parent_width fill_parent_height center_children">
-				<img class="no_drag" style="position: absolute; height: 90vh" src="images/lines.svg" alt="Lines"/>
+				<img class="no_drag" style="position: absolute; height: 90vh; min-width: 100%" src="images/lines.svg" alt="Lines"/>
 				<div id="jcode_logo" class="center_children" style="position:absolute; height: 30vh">
 					<img class="fill_parent_height spin" src="images/circle.svg" alt="Circle"/>
 					<img style="position: absolute; height: 80%" src="images/jcode_outline.svg" alt="Jcodefox"/>
