@@ -8,12 +8,12 @@
 		<link rel="icon" href="images/icon.png">
 		<title>Jcodefox</title>
 		<style>
-body{
-	margin: 0px;
-	background-color: #000000;
-	color: #00ff00;
-	overflow: hidden;
-}
+	body{
+			margin: 0px;
+			background-color: #000000;
+			color: #00ff00;
+			overflow: hidden;
+		}
 	  a {
 		  color: #00ff00;
 		  outline: 2px solid #00ff00;
@@ -75,11 +75,13 @@ body{
 	  }
 		</style>
 		<script type="text/javascript">
+			var lines = null;
 			var element = null;
 			var element_dock_x = 0, element_dock_y = 0;
 			var offset_x = 0, offset_y = 0;
 			var dest_x = 0, dest_y = 0;
 			window.onload = function() {
+				lines = document.getElementById("lines");
 				element = document.getElementById("jcode_logo");
 				element.onmousedown = start_drag;
 				requestAnimationFrame(draw);
@@ -97,7 +99,14 @@ body{
 
 				element_dock_x = window.innerWidth * 0.5 - element.offsetWidth * 0.5;
 				element_dock_y = window.innerHeight * 0.5 - element.offsetHeight * 0.5;
+				console.log(((element.offsetTop + element.offsetHeight * 0.5) / window.innerHeight) * 2.0 - 1.0);
 
+				lines.style.transform = "rotate(" + ((element.offsetLeft / window.innerWidth) * 180.0 - 90.0) + "deg)";
+
+				element.style.transform = "rotate(" + -((element.offsetLeft / window.innerWidth) * 180.0 - 90.0) + "deg)";
+
+				lines.style.left = (element.offsetLeft - lines.width * 0.5) + "px";
+				lines.style.top = (element.offsetTop - lines.height * 0.333333) + "px";
 				requestAnimationFrame(draw);
 			}
 
@@ -120,7 +129,7 @@ body{
 				dest_y = new_top;
 				var x_delta = Math.abs(dest_x - element_dock_x);
 				var y_delta = Math.abs(dest_y - element_dock_y);
-				if (y_delta > x_delta){ 
+				if (y_delta > x_delta){
 					dest_x = element_dock_x;
 				}else{
 					dest_y = element_dock_y;
@@ -135,28 +144,14 @@ body{
 				if (y_delta > x_delta){
 					if (dest_y < window.innerHeight * 0.33){
 						element_dock_y = -element.offsetHeight * 0.5;
-						element.style.transform = 'rotate(180deg)';
-						lines_visibility(false);
 					}else if (dest_y > window.innerHeight * 0.66){
 						element_dock_y = window.innerHeight - element.offsetHeight * 0.5;
-						element.style.transform = 'rotate(0deg)';
-						lines_visibility(false);
-					}else{
-						element.style.transform = 'rotate(0deg)';
-						lines_visibility(true);
 					}
 				}else{
 					if (dest_x < window.innerWidth * 0.33){
 						element_dock_x = 0;
-						element.style.transform = 'rotate(90deg)';
-						lines_visibility(false);
 					}else if (dest_x > window.innerWidth * 0.66){
 						element_dock_x = window.innerWidth;
-						element.style.transform = 'rotate(270deg)';
-						lines_visibility(false);
-					}else{
-						element.style.transform = 'rotate(0deg)';
-						lines_visibility(true);
 					}
 				}
 				dest_x = element_dock_x;
@@ -165,9 +160,9 @@ body{
 
 			function lines_visibility(value){
 				if(value){
-					document.getElementById("lines").style.visibility = "visible";
+					lines.style.visibility = "visible";
 				}else{
-					document.getElementById("lines").style.visibility = "hidden";
+					lines.style.visibility = "hidden";
 				}
 			}
 		</script>
