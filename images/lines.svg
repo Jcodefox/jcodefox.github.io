@@ -1,13 +1,81 @@
-<?xml version="1.0" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 20010904//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <!-- Created using Krita: https://krita.org -->
-<svg xmlns="http://www.w3.org/2000/svg" 
-    xmlns:xlink="http://www.w3.org/1999/xlink"
-    xmlns:krita="http://krita.org/namespaces/svg/krita"
-    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
-    width="384pt"
-    height="216pt"
-    viewBox="0 0 384 216">
-<defs/>
-<path id="shape1" transform="translate(-130.319991550187, 57.1199990112089)" fill="none" stroke="#00ff00" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="bevel" d="M0 36.48L233.52 36L283.92 0L648 0.239998" sodipodi:nodetypes="cccc"/><path id="shape2" transform="translate(-200.159987021835, 125.519994616447)" fill="none" stroke="#00ff00" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="bevel" d="M709.92 0L496.92 0.239997L424.92 35.76L340.92 36.24L279.48 16.56L0 16.8" sodipodi:nodetypes="cccccc"/><path id="shape3" transform="translate(-163.439989402721, 24.4799995614873)" fill="none" stroke="#00ff00" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="bevel" d="M0 28.08L254.16 27.84L296.4 4.446e-06L666.72 0" sodipodi:nodetypes="cccc"/><path id="shape02" transform="translate(-172.799988795829, 159.599993125705)" fill="none" stroke="#00ff00" stroke-width="2.4" stroke-linecap="square" stroke-linejoin="bevel" d="M673.92 0L474.613 0.0133475L402.613 35.5333L318.613 36.0133L257.173 16.3333L0 16.8" sodipodi:nodetypes="cccccc"/>
+
+<svg
+   width="384pt"
+   height="216pt"
+   viewBox="0 0 384 216"
+   version="1.1"
+   id="svg1"
+   sodipodi:docname="lines.svg"
+   inkscape:version="1.3 (0e150ed6c4, 2023-07-21)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview1"
+     pagecolor="#505050"
+     bordercolor="#eeeeee"
+     borderopacity="1"
+     inkscape:showpageshadow="0"
+     inkscape:pageopacity="0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#505050"
+     inkscape:document-units="pt"
+     inkscape:zoom="2.1445313"
+     inkscape:cx="249.47177"
+     inkscape:cy="161.80692"
+     inkscape:window-width="1600"
+     inkscape:window-height="864"
+     inkscape:window-x="0"
+     inkscape:window-y="0"
+     inkscape:window-maximized="1"
+     inkscape:current-layer="svg1" />
+  <defs
+     id="defs1" />
+  <path
+     id="shape1"
+     transform="translate(-130.319991550187, 57.1199990112089)"
+     fill="none"
+     stroke="#00ff00"
+     stroke-width="2.4"
+     stroke-linecap="square"
+     stroke-linejoin="bevel"
+     d="M0 36.48L233.52 36L283.92 0L648 0.239998"
+     sodipodi:nodetypes="cccc"
+     style="stroke-linecap:round" />
+  <path
+     id="shape2"
+     transform="translate(-200.159987021835, 125.519994616447)"
+     fill="none"
+     stroke="#00ff00"
+     stroke-width="2.4"
+     stroke-linecap="square"
+     stroke-linejoin="bevel"
+     d="M709.92 0L496.92 0.239997L424.92 35.76L340.92 36.24L279.48 16.56L0 16.8"
+     sodipodi:nodetypes="cccccc"
+     style="stroke-linecap:round" />
+  <path
+     id="shape3"
+     transform="translate(-163.439989402721, 24.4799995614873)"
+     fill="none"
+     stroke="#00ff00"
+     stroke-width="2.4"
+     stroke-linecap="square"
+     stroke-linejoin="bevel"
+     d="M0 28.08L254.16 27.84L296.4 4.446e-06L666.72 0"
+     sodipodi:nodetypes="cccc"
+     style="stroke-linecap:round;stroke:#ff0000;stroke-opacity:1" />
+  <path
+     id="shape02"
+     transform="translate(-172.799988795829, 159.599993125705)"
+     fill="none"
+     stroke="#00ff00"
+     stroke-width="2.4"
+     stroke-linecap="square"
+     stroke-linejoin="bevel"
+     d="M673.92 0L474.613 0.0133475L402.613 35.5333L318.613 36.0133L257.173 16.3333L0 16.8"
+     sodipodi:nodetypes="cccccc"
+     style="stroke-linecap:round;stroke:#ff0000;stroke-opacity:1" />
 </svg>
