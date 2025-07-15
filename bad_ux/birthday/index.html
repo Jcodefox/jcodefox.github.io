@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <script>
+      function showVal(val){
+        document.getElementById("year_display").value = val;
+      }
+    </script>
+  </head>
+  <body>
+    <header></header>
+    <main>
+      <p>Select Birth date</p>
+      <form>
+        <label style="vertical-align:top">month</label>
+        <select name="month_a" id="month_a" size="7">
+          <option value=""></option>
+          <option value="j">j</option>
+          <option value="nov">nov</option>
+          <option value="dec">dec</option>
+          <option value="febr">febr</option>
+          <option value="m">m</option>
+          <option value="sept">sept</option>
+        </select>
+        <select name="month_b" id="month_b" size="7">
+          <option value=""></option>
+          <option value="octo">octo</option>
+          <option value="em">em</option>
+          <option value="uly">uly</option>
+          <option value="a">a</option>
+          <option value="une">une</option>
+          <option value="an">an</option>
+        </select>
+        <select name="month_c" id="month_c" size="7">
+          <option value=""></option>
+          <option value="ber">ber</option>
+          <option value="y">y</option>
+          <option value="uary">uary</option>
+          <option value="rch">rch</option>
+          <option value="pril">pril</option>
+          <option value="ugust">ugust</option>
+        </select><br/>
+        <label>day</label>
+        <input type="number" min="1" max="31" value="1"></input><br/>
+        <label>year</label>
+        <input type="text" id="year_display" readonly="true" value="1900" style="width:50px"></input>
+        <input type="range" id="year" min="1900" max="2025" value="1900" oninput="showVal(this.value)" onchange="showVal(this.value)"></input></br>
+        <input type="submit" value="Submit">
+      </form>
+    </main>
+    <footer></footer>
+  </body>
+</html>
