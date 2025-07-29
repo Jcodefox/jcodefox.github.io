@@ -8,179 +8,57 @@
 		<link rel="icon" href="images/icon.png">
 		<title>Jcodefox</title>
 		<style>
-	body{
-			margin: 0px;
-			background-color: #000000;
-			color: #00ff00;
-			overflow: hidden;
-		}
-	  a {
-		  color: #00ff00;
-		  outline: 2px solid #00ff00;
-		  outline-offset: 2px;
-		  text-decoration: none;
-		  margin: 5px;
-	  }
-	  #title {
-		  position: absolute;
-		  top: 5px;
-		  left: 5px;
-		  text-align: center;
-		  margin: 20px;
-		  z-index: -1;
-	  }
-	  #links {
-		  position: absolute;
-		  top: 10px;
-		  right: 5px;
-	  }
-	  .fill_parent_height {
-		  position: absolute;
-		  height: 100%;
-	  }
-	  .fill_parent_width {
-		  width: 100%;
-		  position: absolute;
-	  }
-	  .center_children {
-		  justify-content: center;
-		  align-items: center;
-		  display: flex;
-	  }
-
-	  .spin {
-		  animation-name: spin;
-		  animation-duration: 15000ms;
-		  animation-iteration-count: infinite;
-		  animation-timing-function: linear;
-	  }
-
-	  .no_drag {
-		  pointer-events: none;
-		  user-drag: none;
-		  -webkit-user-drag: none;
-		  user-select: none;
-		  -moz-user-select: none;
-		  -webkit-user-select: none;
-		  -ms-user-select: none;
-	  }
-
-	  @keyframes spin {
-		  from {
-			  transform: rotate(0deg);
-		  }
-		  to {
-			  transform: rotate(360deg);
-		  }
-	  }
+			body{
+				margin: 0px;
+				background-color: #0D2642;
+				color: #ED8D25;
+				overflow: hidden;
+				text-align: center;
+			}
+			a {
+				color: #ED8D25;
+				outline: 2px solid #eda125;
+				outline-offset: 2px;
+				border-radius: 2pt;
+				text-decoration: none;
+				margin: 5px;
+			}
+			#box{
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+				border-radius: 10pt;
+				background: #050e19;
+				height: 350px;
+				width: 500px;
+			}
+			#links{
+				position: absolute;
+				bottom: 40px;
+				left: 50%;
+				transform: translate(-50%, 0%);
+				width: 100%;
+			}
 		</style>
-		<script type="text/javascript">
-			var lines = null;
-			var element = null;
-			var element_dock_x = 0, element_dock_y = 0;
-			var offset_x = 0, offset_y = 0;
-			var dest_x = 0, dest_y = 0;
-			window.onload = function() {
-				lines = document.getElementById("lines");
-				element = document.getElementById("jcode_logo");
-				element.onmousedown = start_drag;
-				requestAnimationFrame(draw);
-				element_dock_x = window.innerWidth * 0.5 - element.width * 0.5;
-				element_dock_y = window.innerHeight * 0.5 - element.height * 0.5;
-				dest_x = element_dock_x;
-				dest_y = element_dock_y;
-			}
-
-			function draw(){
-				var move_dir_x = Math.min(Math.max(dest_x - element.offsetLeft, -25), 25);
-				element.style.left = element.offsetLeft + move_dir_x + "px";
-				var move_dir_y = Math.min(Math.max(dest_y - element.offsetTop, -25), 25);
-				element.style.top = element.offsetTop + move_dir_y + "px";
-
-				element_dock_x = window.innerWidth * 0.5 - element.offsetWidth * 0.5;
-				element_dock_y = window.innerHeight * 0.5 - element.offsetHeight * 0.5;
-				console.log(((element.offsetTop + element.offsetHeight * 0.5) / window.innerHeight) * 2.0 - 1.0);
-
-				lines.style.transform = "rotate(" + ((element.offsetLeft / window.innerWidth) * 180.0 - 90.0) + "deg)";
-
-				element.style.transform = "rotate(" + -((element.offsetLeft / window.innerWidth) * 180.0 - 90.0) + "deg)";
-
-				lines.style.left = (element.offsetLeft - lines.width * 0.5) + "px";
-				lines.style.top = (element.offsetTop - lines.height * 0.333333) + "px";
-				requestAnimationFrame(draw);
-			}
-
-			function start_drag(e) {
-				e = e || window.event;
-				e.preventDefault();
-				offset_x = element.offsetLeft - e.clientX;
-				offset_y = element.offsetTop - e.clientY;
-				document.onmousemove = drag;
-				document.onmouseup = stop_drag;
-			}
-
-			function drag(e) {
-				e = e || window.event;
-				e.preventDefault();
-				element = document.getElementById("jcode_logo");
-				var new_top = (e.clientY + offset_y);
-				var new_left = (e.clientX + offset_x);
-				dest_x = new_left;
-				dest_y = new_top;
-				var x_delta = Math.abs(dest_x - element_dock_x);
-				var y_delta = Math.abs(dest_y - element_dock_y);
-				if (y_delta > x_delta){
-					dest_x = element_dock_x;
-				}else{
-					dest_y = element_dock_y;
-				}
-			}
-
-			function stop_drag() {
-				document.onmousemove = null;
-				document.onmouseup = null;
-				var x_delta = Math.abs(dest_x - element_dock_x);
-				var y_delta = Math.abs(dest_y - element_dock_y);
-				if (y_delta > x_delta){
-					if (dest_y < window.innerHeight * 0.33){
-						element_dock_y = -element.offsetHeight * 0.5;
-					}else if (dest_y > window.innerHeight * 0.66){
-						element_dock_y = window.innerHeight - element.offsetHeight * 0.5;
-					}
-				}else{
-					if (dest_x < window.innerWidth * 0.33){
-						element_dock_x = 0;
-					}else if (dest_x > window.innerWidth * 0.66){
-						element_dock_x = window.innerWidth;
-					}
-				}
-				dest_x = element_dock_x;
-				dest_y = element_dock_y;
-			}
-
-			function lines_visibility(value){
-				if(value){
-					lines.style.visibility = "visible";
-				}else{
-					lines.style.visibility = "hidden";
-				}
-			}
-		</script>
 	</head>
 	<body>
-		<div style="z-index: -10; top: 0px" class="fill_parent_width fill_parent_height">
-			<div class="fill_parent_width fill_parent_height center_children">
-				<img id="lines" class="no_drag" style="position: absolute; height: 90vh; min-width: 100%" src="images/lines.svg" alt="Lines"/>
-				<div id="jcode_logo" class="center_children" style="position:absolute; height: 30vh">
-					<img class="fill_parent_height spin" src="images/circle.svg" alt="Circle"/>
-					<img style="position: absolute; height: 80%" src="images/jcode_outline.svg" alt="Jcodefox"/>
-				</div>
-			</div>
-			<div id="links">
-				<a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">Youtube channel</a>
-				<a href="https://jcodefox.itch.io/">Games I made</a>
-			</div>
+		<div id="box">
+		<h1 id="title">Jcodefox</h1>
+		<br>
+		<p>
+		Hello, this page will soon™ be overhauled
+		<br>
+		In the meantime, my links can be found below
+		<br>
+		Have a nice day!
+		</p>
+		<br>
+		<div id="links">
+			<a href="https://www.youtube.com/channel/UC0OEt-pHiBlDKOOrnJ4MLUw">My Youtube</a>
+			<a href="https://jcodefox.itch.io/">My Itch.io</a>
+			<a href="https://github.com/Jcodefox/">My Github</a>
 		</div>
-		<h1 id="title">Jcodefox<h1>
+		</div>
 	</body>
 </html>
